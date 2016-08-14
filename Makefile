@@ -63,3 +63,26 @@ rebuilddebugnet: debugnet
 	
 rebuild: clean
 rebuild: all
+
+########################### DEBUG BUILD ###########################
+# Build with -g option and don't strip the ELF
+
+debug: $(PROJECT)_debug.vpk
+
+$(PROJECT)_debug.vpk: eboot_debug.bin param.sfo
+	vita-pack-vpk -s out/param.sfo -b out/eboot_debug.bin \
+		--add sce_sys/icon0.png=sce_sys/icon0.png \
+		--add sce_sys/livearea/contents/bg.png=sce_sys/livearea/contents/bg.png \
+		--add sce_sys/livearea/contents/startup.png=sce_sys/livearea/contents/startup.png \
+		--add sce_sys/livearea/contents/template.xml=sce_sys/livearea/contents/template.xml \
+	out/$(PROJECT)_debug.vpk
+
+eboot_debug.bin: out/$(PROJECT)_debug.velf
+	vita-make-fself out/$(PROJECT)_debug.velf out/eboot_debug.bin
+
+out/$(PROJECT)_debug.velf: out/$(PROJECT)_debug.elf
+	vita-elf-create $< $@
+
+out/$(PROJECT)_debug.elf: $(HOMEBREW_OBJS)
+	mkdir -p out
+	$(CC) -Wl,-q,-g $(LDFLAGS) $(HOMEBREW_OBJS) $(LIBS) -o $@
