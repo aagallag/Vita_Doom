@@ -1,4 +1,4 @@
-Vita Doom - PS Vita Doom Port
+# Vita Doom - PS Vita Doom Port
 
 In order to play Doom, you must add WAD files to:
 cache0:/VitaDefilerClient/Documents/WADs (for Rejuvenate users)
@@ -10,8 +10,9 @@ The easiest way to accomplish that is via FTP with FTPVita. If you do not know w
 This port only supports official Doom WADs and does not currently have audio.
 
 
-The original Readme.txt follows:
+## The original Readme.txt:
 
+```
 10/24/2005 3:30 am GMT
 Release Notes for Doom-PSP v0.04 S.S. b5:
 
@@ -61,3 +62,4 @@ what some people will do.
 
 Later,
 Ryochan7
+```
